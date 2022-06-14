@@ -7,9 +7,10 @@ namespace kol2.Services
 {
     public interface IXService
     {
-        public Task<bool> DoesAlbumExist(int id);
-        public Task<AlbumFull> GetAlbumInfo(int id);
-        //public Task DeleteMusician(Musician musician);
+        public Task<bool> DoesAlbumExist(int idAlbum);
+        public Task<bool> AreTracksInAlbums(int idMusician);
+        public Task<AlbumFull> GetAlbumInfo(int idAlbum);
+        public Task DeleteMusician(int id);
         public Task SaveDatabase();
     }
 }

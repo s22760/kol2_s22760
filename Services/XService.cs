@@ -45,10 +45,22 @@ namespace kol2.Services
             return FullAlbum;
         }
 
-        /*public Task DeleteMusician(Musician musician)
+        public async Task DeleteMusician(int id)
         {
             
-        }*/
+        }
+
+        public async Task<bool> AreTracksInAlbums(int idMusician)
+        {
+            var MusicianTracks = await _context.MusicianTracks.Where(e => e.IdMusician == idMusician).Select(e => e.IdTrack).ToListAsync();
+            foreach (var TrackId in MusicianTracks)
+            {
+                var result = await _context.Tracks.AnyAsync(e => e.IdMusicAlbum != null);
+                if (result)
+                    return true;
+            }
+            return false;
+        }
 
         public async Task SaveDatabase()
         {

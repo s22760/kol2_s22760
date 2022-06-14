@@ -10,7 +10,7 @@ namespace kol2.Models
         public int IdTrack { get; set; }
         public String TrackName { get; set; }
         public float Duration { get; set; }
-        public int IdMusicAlbum { get; set; }
+        public int? IdMusicAlbum { get; set; }
         public IEnumerable<MusicianTrack> Musicians { get; set; }
         public virtual Album Album { get; set; }
     }

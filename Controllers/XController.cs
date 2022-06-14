@@ -33,13 +33,13 @@ namespace kol2.Controllers
         }
         
         [HttpDelete]
-        public async Task<IActionResult> DeleteMusician(Musician musician)
+        public async Task<IActionResult> DeleteMusician(int id)
         {
             using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 try
                 {
-                    await _service.DeleteMusician(musician);
+                    await _service.DeleteMusician(id);
                     scope.Complete();
                 }
                 catch (Exception)
