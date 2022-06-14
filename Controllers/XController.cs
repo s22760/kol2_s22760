@@ -33,13 +33,21 @@ namespace kol2.Controllers
         }
         
         [HttpDelete]
-        public async Task<IActionResult> DeleteMusician(int id)
+        public async Task<IActionResult> DeleteMusician(int idMusician)
         {
             using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 try
                 {
-                    await _service.DeleteMusician(id);
+                    var result = await _service.AreTracksInAlbums(idMusician);
+                    if(!result)
+                    {
+                        await _service.DeleteMusician(idMusician);
+                    }
+                    else
+                    {
+                        return BadRequest("Musician has tracks in albums");
+                    }
                     scope.Complete();
                 }
                 catch (Exception)
